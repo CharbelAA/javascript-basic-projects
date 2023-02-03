@@ -71,14 +71,27 @@ const menu = [
     img: "./images/item-9.jpeg",
     desc: `skateboard fam synth authentic semiotics. Live-edge lyft af, edison bulb yuccie crucifix microdosing.`,
   },
+  {
+    id: 10,
+    title: "Steak Diner",
+    category: "steak",
+    price: 16.99,
+    img: "./images/item-10.jpeg",
+    desc: `skateboard fam synth authentic semiotics. Live-edge lyft af, edison bulb yuccie crucifix microdosing.`,
+  },
 ];
 
-const buttons = document.querySelectorAll(".filter-btn");
+const btnContainer = document.querySelector(".btn-container");
 
 const sectionCenter = document.querySelector(".section-center");
 
 window.addEventListener("DOMContentLoaded", () => {
   displayMenuItems(menu);
+  displayButtons(menu);
+
+  //get buttons and add event listener
+
+  const buttons = document.querySelectorAll(".filter-btn");
 
   buttons.forEach((btn) => {
     btn.addEventListener("click", () => {
@@ -93,6 +106,7 @@ window.addEventListener("DOMContentLoaded", () => {
       displayMenuItems(filteredMenu);
     });
   });
+  //get buttons and add event listener
 });
 
 function displayMenuItems(menuItems) {
@@ -112,4 +126,26 @@ function displayMenuItems(menuItems) {
   });
 
   sectionCenter.innerHTML = displayedMenu.join("");
+}
+
+function displayButtons(menuItems) {
+  let uniqueCaterogies = new Set();
+
+  menuItems.forEach((menuItem) => {
+    uniqueCaterogies.add(menuItem.category);
+  });
+
+  let uniqueCaterogiesArr = Array.from(uniqueCaterogies);
+
+  let displayButtons = [
+    `<button type="button" class="filter-btn" data-id="all">all</button>`,
+  ];
+
+  uniqueCaterogiesArr.forEach((item) => {
+    displayButtons.push(
+      `<button type="button" class="filter-btn" data-id="${item}">${item}</button>`
+    );
+  });
+
+  btnContainer.innerHTML = displayButtons.join("");
 }
