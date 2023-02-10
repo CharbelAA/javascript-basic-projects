@@ -3,6 +3,7 @@ const btns = document.querySelectorAll(".tab-btn");
 const articles = document.querySelectorAll(".content");
 about.addEventListener("click", function (e) {
   const id = e.target.dataset.id;
+  console.log(e.target.dataset);
   if (id) {
     // remove selected from other buttons
     btns.forEach(function (btn) {
